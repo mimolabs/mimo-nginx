@@ -1,13 +1,10 @@
 FROM nginx:alpine
 
-# RUN \
-#   mv nginx.conf /etc/nginx/nginx.conf
+COPY . /tmp/
 
-COPY mimo-api.conf /etc/nginx/sites-enabled/api.conf
-COPY mimo-dashboard.conf /etc/nginx/sites-enabled/dashboard.conf
-COPY nginx.conf /etc/nginx/nginx.conf
+ENV MIMO_DOMAIN=wisp.services
 
-EXPOSE 80
+RUN sh /tmp/install.sh && echo eggs
 
-# CMD ['nginx', '-c', '/etc/nginx/nginx.conf']
-# CMD ["nginx", "-g", "daemon off;", "-c", "/etc/nginx/nginx.conf"]
+# EXPOSE 8080
+# EXPOSE 8443
